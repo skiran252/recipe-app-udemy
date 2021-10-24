@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="editForm.valid && onSubmit(editForm)" #editForm="ngForm">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            ngModel
+            #name="ngModel"
+            required
+            [ngClass]="{
+              'form-control-danger': editForm.submitted && name.invalid,
+              'form-control-success': editForm.submitted && name.valid
+            }"
+          />
+          <div *ngIf="editForm.submitted && name.invalid" class="help-block">
+            Name is required
+          </div>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            id="amount"
+            name="amount"
+            ngModel
+            #amount="ngModel"
+            required
+            pattern="^[1-9]+[0-9]*$"
+            [ngClass]="{
+              'form-control-danger': editForm.submitted && amount.invalid,
+              'form-control-success': editForm.submitted && amount.valid
+            }"
+          />
+          <div *ngIf="editForm.submitted && amount.invalid" class="help-block">
+            Amount is required
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            class="btn btn-success mx-1"
+            type="submit"
+            [disabled]="editForm.invalid"
+          >
+            {{ editMode ? "Update" : "Add" }}
+          </button>
+          <button
+            *ngIf="editMode"
+            class="btn btn-danger mx-1"
+            type="button"
+            (click)="onDelete()"
+          >
+            Delete
+          </button>
+          <button class="btn btn-primary mx-1" type="reset" (click)="onClear()">
+            Reset
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

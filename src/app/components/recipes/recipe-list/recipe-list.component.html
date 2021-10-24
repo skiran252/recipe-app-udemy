@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-xs-12">
+    
+    <div *ngIf="recipes.length > 0; else noRecipes">
+      <p >Recipies:</p>
+      <app-recipe-item
+        *ngFor="let recipeObj of recipes; let i = index"
+        [recipe]="recipeObj"
+        [id]="recipeObj.id"
+        [routerLink]="['/recipes', recipeObj.id]"
+      >
+        ></app-recipe-item
+      >
+    </div>
+    <ng-template #noRecipes>
+      <h4>No Recipes found Try Adding New/ Fetch</h4>
+    </ng-template>
+  </div>
+</div>
